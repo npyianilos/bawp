@@ -8,6 +8,9 @@
     },
     {
       "path": "./tools/generators"
+    },
+    {
+      "path": "./packages/design-system/form-controls"
     }
   ]
 }

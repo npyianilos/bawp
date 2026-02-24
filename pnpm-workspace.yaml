@@ -2,3 +2,4 @@ packages:
   - 'packages/*'
   - 'packages/utils/*'
   - 'tools/*'
+  - 'packages/design-system/*'
