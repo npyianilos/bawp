@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "cdk": {
+      "factory": "./dist/generators/cdk/cdk",
+      "schema": "./dist/generators/cdk/schema.json",
+      "description": "cdk generator"
+    }
+  }
+}
