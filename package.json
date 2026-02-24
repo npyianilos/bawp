@@ -10,6 +10,7 @@
     "@nx/eslint-plugin": "22.5.1",
     "@nx/js": "22.5.1",
     "@nx/node": "22.5.1",
+    "@nx/plugin": "22.5.1",
     "@nx/react": "22.5.1",
     "@nx/storybook": "22.5.1",
     "@nx/vite": "22.5.1",
