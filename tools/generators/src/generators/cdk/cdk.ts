@@ -29,6 +29,7 @@ export async function cdkGenerator(tree: Tree, schema: CdkGeneratorSchema) {
     ...names(name),
     offset,
     scope,
+    tmpl: '',
   });
 
   await formatFiles(tree);

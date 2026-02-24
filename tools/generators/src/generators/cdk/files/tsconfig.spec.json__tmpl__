@@ -1,5 +1,5 @@
 {
-  "extends": "<%= offset %>/tsconfig.base.json",
+  "extends": "<%= offset %>tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/vitest",
     "types": ["vitest/globals", "vitest/importMeta", "node", "vitest"],

@@ -1,5 +1,5 @@
 {
-  "extends": "<%= offset %>/tsconfig.base.json",
+  "extends": "<%= offset %>tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",
