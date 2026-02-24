@@ -1,5 +1,5 @@
 {
-  "name": "@org/generators",
+  "name": "@bawp/generators",
   "version": "0.0.1",
   "private": true,
   "main": "./dist/index.js",
@@ -18,9 +18,7 @@
     "targets": {
       "build": {
         "executor": "@nx/js:tsc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
+        "outputs": ["{options.outputPath}"],
         "options": {
           "outputPath": "tools/generators/dist",
           "main": "tools/generators/src/index.ts",
@@ -48,9 +46,5 @@
     "tslib": "^2.3.0"
   },
   "generators": "./generators.json",
-  "files": [
-    "dist",
-    "!**/*.tsbuildinfo",
-    "generators.json"
-  ]
+  "files": ["dist", "!**/*.tsbuildinfo", "generators.json"]
 }
