@@ -23,6 +23,9 @@
     },
     {
       "path": "./packages/domains/onboard/ui"
+    },
+    {
+      "path": "./packages/domains/onboard/router"
     }
   ]
 }

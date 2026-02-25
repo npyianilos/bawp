@@ -56,6 +56,7 @@
     "@cb/apricot-react": "^7.4.0",
     "@nx/devkit": "22.5.1",
     "@opensearch-project/opensearch": "^3.5.1",
+    "@tanstack/react-query": "^5.90.21",
     "@types/aws-lambda": "^8.10.160",
     "@types/lodash-es": "^4.17.12",
     "aws-cdk-lib": "^2.240.0",
