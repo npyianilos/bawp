@@ -1,6 +1,10 @@
 import type { OnboardService } from './OnboardService.js';
-import type { School, CreateSchoolInput } from '../types/school.js';
-import type { Student, CreateStudentInput } from '../types/student.js';
+import type {
+  School,
+  Student,
+  CreateSchoolInput,
+  CreateStudentInput,
+} from '@bawp/onboard-router';
 
 let nextId = 1;
 function generateId(): string {

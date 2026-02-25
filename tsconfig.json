@@ -26,6 +26,9 @@
     },
     {
       "path": "./packages/domains/onboard/router"
+    },
+    {
+      "path": "./packages/domains/onboard/lambda"
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "@bawp/onboard-lambda",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.997.0",
+    "@aws-sdk/lib-dynamodb": "^3.997.0",
+    "@bawp/onboard-router": "workspace:*",
+    "@trpc/server": "^11.10.0",
+    "tslib": "^2.3.0"
+  }
+}

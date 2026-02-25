@@ -1,6 +1,10 @@
 import { createContext, useContext } from 'react';
-import type { School, CreateSchoolInput } from '../types/school.js';
-import type { Student, CreateStudentInput } from '../types/student.js';
+import type {
+  School,
+  Student,
+  CreateSchoolInput,
+  CreateStudentInput,
+} from '@bawp/onboard-router';
 
 export interface OnboardService {
   getSchools(): Promise<School[]>;

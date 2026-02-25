@@ -1,5 +1,5 @@
 import { Table, Column, PrimaryButton, NakedButton } from '@cb/apricot-react';
-import type { School } from '../types/school.js';
+import type { School } from '@bawp/onboard-router';
 
 type SchoolListProps = {
   schools: School[];

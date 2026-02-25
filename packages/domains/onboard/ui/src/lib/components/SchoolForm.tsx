@@ -1,6 +1,6 @@
 import { useForm, useController } from 'react-hook-form';
 import { Modal, PrimaryButton, NakedButton, Input } from '@cb/apricot-react';
-import type { CreateSchoolInput } from '../types/school.js';
+import type { CreateSchoolInput } from '@bawp/onboard-router';
 
 type SchoolFormProps = {
   open: boolean;

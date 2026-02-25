@@ -11,9 +11,12 @@ import { SchoolList } from './components/SchoolList.js';
 import { SchoolForm } from './components/SchoolForm.js';
 import { StudentList } from './components/StudentList.js';
 import { StudentForm } from './components/StudentForm.js';
-import type { School } from './types/school.js';
-import type { CreateSchoolInput } from './types/school.js';
-import type { CreateStudentInput, Student } from './types/student.js';
+import type {
+  School,
+  Student,
+  CreateSchoolInput,
+  CreateStudentInput,
+} from '@bawp/onboard-router';
 
 import '@cb/apricot/CBGrid';
 
