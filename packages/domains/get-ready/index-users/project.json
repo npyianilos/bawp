@@ -1,0 +1,20 @@
+{
+  "targets": {
+    "synth": {
+      "command": "cdk synth",
+      "options": { "cwd": "{projectRoot}" },
+      "dependsOn": ["^build", "build"],
+      "outputs": ["{projectRoot}/cdk.out"]
+    },
+    "deploy": {
+      "command": "cdk deploy",
+      "options": { "cwd": "{projectRoot}" },
+      "dependsOn": ["^build", "build"]
+    },
+    "destroy": {
+      "command": "cdk destroy --all --force",
+      "options": { "cwd": "{projectRoot}" },
+      "dependsOn": ["^build", "build"]
+    }
+  }
+}

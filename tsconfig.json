@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/design-system/form-controls"
+    },
+    {
+      "path": "./packages/domains/get-ready/index-users"
     }
   ]
 }
