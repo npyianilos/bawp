@@ -54,10 +54,13 @@
     "@cb/apricot": "^4.11.1",
     "@cb/apricot-react": "^7.4.0",
     "@nx/devkit": "22.5.1",
+    "@types/lodash-es": "^4.17.12",
     "aws-cdk-lib": "^2.240.0",
     "constructs": "^10.5.1",
+    "lodash-es": "^4.17.23",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.71.2",
     "sass-embedded": "^1.97.3"
   }
 }

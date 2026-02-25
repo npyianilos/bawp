@@ -7,6 +7,10 @@ IF/WHEN creating UX components, use our "apricot" design system:
 consult [the overview](agent_docs/apricot/apricot-overview.md)
 for an overview of our components and references to detailed documentation for each component.
 
+# Storybook
+
+IF/WHEN writing storybook stories, consult [agent_docs/storybook.md](agent_docs/storybook.md).
+
 # General Guidelines for working with Nx
 
 -   For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
