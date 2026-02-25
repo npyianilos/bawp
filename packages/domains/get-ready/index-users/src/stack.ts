@@ -5,6 +5,7 @@ import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import { Stack, StackProps, RemovalPolicy } from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
+import { StudentEnrolledEvent } from '@bawp/events';
 
 export class IndexUsersStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -39,15 +40,15 @@ export class IndexUsersStack extends Stack {
     const bus = events.EventBus.fromEventBusName(
       this,
       'SharedBus',
-      'bawp-event-bus',
+      'bawp-event-bus'
     );
 
     // Rule: match StudentEnrolled events and route to Lambda
     new events.Rule(this, 'StudentEnrolledRule', {
       eventBus: bus,
       eventPattern: {
-        source: ['bawp.enrollment'],
-        detailType: ['StudentEnrolled'],
+        source: [StudentEnrolledEvent.source],
+        detailType: [StudentEnrolledEvent.detailType],
       },
       targets: [new targets.LambdaFunction(indexFn)],
     });

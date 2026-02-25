@@ -2,13 +2,7 @@ import { EventBridgeHandler } from 'aws-lambda';
 import { Client } from '@opensearch-project/opensearch';
 import { AwsSigv4Signer } from '@opensearch-project/opensearch/aws';
 import { defaultProvider } from '@aws-sdk/credential-provider-node';
-
-export type StudentEnrolledPayload = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  schoolId: string;
-};
+import { StudentEnrolledEvent } from '@bawp/events';
 
 const client = new Client({
   ...AwsSigv4Signer({
@@ -19,13 +13,16 @@ const client = new Client({
 });
 
 export const handler: EventBridgeHandler<
-  'StudentEnrolled',
-  StudentEnrolledPayload,
+  typeof StudentEnrolledEvent.detailType,
+  StudentEnrolledEvent.Payload,
   void
 > = async (event) => {
   const student = event.detail;
 
-  console.log('Indexing student', { id: student.id, schoolId: student.schoolId });
+  console.log('Indexing student', {
+    id: student.id,
+    schoolId: student.schoolId,
+  });
 
   await client.index({
     index: 'students',

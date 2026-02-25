@@ -14,6 +14,12 @@
     },
     {
       "path": "./packages/domains/get-ready/index-users"
+    },
+    {
+      "path": "./packages/events"
+    },
+    {
+      "path": "./packages/event-bus"
     }
   ]
 }
