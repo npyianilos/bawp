@@ -2,7 +2,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './header/header';
-import { OnboardUi } from '@bawp/onboard-ui';
+import { OnboardWithTrpc } from '@bawp/onboard-ui';
 
 export function App() {
   return (
@@ -15,7 +15,7 @@ export function App() {
           path="/onboard"
           element={
             <div>
-              <OnboardUi />
+              <OnboardWithTrpc apiUrl="https://a7hvippzbwtzpigl7ippdv4yim0frjee.lambda-url.us-east-1.on.aws" />
             </div>
           }
         />
