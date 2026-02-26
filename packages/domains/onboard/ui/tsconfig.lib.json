@@ -38,6 +38,9 @@
   "references": [
     {
       "path": "../router/tsconfig.lib.json"
+    },
+    {
+      "path": "../../../design-system/form-controls/tsconfig.lib.json"
     }
   ]
 }

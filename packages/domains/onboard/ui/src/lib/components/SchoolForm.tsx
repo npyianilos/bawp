@@ -1,5 +1,6 @@
-import { useForm, useController } from 'react-hook-form';
-import { Modal, PrimaryButton, NakedButton, Input } from '@cb/apricot-react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { Modal, PrimaryButton, NakedButton } from '@cb/apricot-react';
+import { Input } from '@bawp/form-controls';
 import type { CreateSchoolInput } from '@bawp/onboard-router';
 
 type SchoolFormProps = {
@@ -12,50 +13,34 @@ export function SchoolForm({ open, onClose, onSave }: SchoolFormProps) {
   const methods = useForm<CreateSchoolInput>({
     defaultValues: { name: '' },
   });
+  const { reset, handleSubmit } = methods;
 
-  const nameField = useController({
-    name: 'name',
-    control: methods.control,
-    rules: { required: 'School Name is required' },
-  });
-
-  const handleSubmit = methods.handleSubmit((data) => {
+  const onSubmit = handleSubmit((data) => {
     onSave(data);
-    methods.reset();
+    reset();
     onClose();
   });
-
-  const handleClose = () => {
-    methods.reset();
-    onClose();
-  };
 
   return (
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={() => {
+        reset();
+        onClose();
+      }}
       title="Add School"
-      withHeader
-      withFooter
       footer={
         <>
-          <NakedButton onClick={handleClose}>Cancel</NakedButton>
-          <PrimaryButton onClick={handleSubmit}>Save</PrimaryButton>
+          <NakedButton data-cb-modal-close>Cancel</NakedButton>
+          <PrimaryButton onClick={onSubmit}>Save</PrimaryButton>
         </>
       }
     >
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="School Name"
-          floating
-          required
-          value={nameField.field.value ?? ''}
-          onChange={(_e: unknown, val: unknown) => nameField.field.onChange(val)}
-          onBlur={nameField.field.onBlur}
-          validation={nameField.fieldState.error ? 'error' : undefined}
-          validationMsg={nameField.fieldState.error?.message}
-        />
-      </form>
+      <FormProvider {...methods}>
+        <form onSubmit={onSubmit}>
+          <Input name="name" label="School Name" required />
+        </form>
+      </FormProvider>
     </Modal>
   );
 }

@@ -1,5 +1,10 @@
 import type { OnboardDataAccess } from './data-access.js';
-import type { School, Student, CreateSchoolInput, CreateStudentInput } from './types.js';
+import type {
+  School,
+  Student,
+  CreateSchoolInput,
+  CreateStudentInput,
+} from './types.js';
 
 let nextId = 1;
 function generateId(): string {

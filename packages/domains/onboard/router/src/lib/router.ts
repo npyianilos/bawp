@@ -12,7 +12,7 @@ export type Context = {
   dataAccess: OnboardDataAccess;
 };
 
-const t = initTRPC.context<Context>().create();
+const t = initTRPC.context<Context>().create({ allowOutsideOfServer: true });
 
 const publicProcedure = t.procedure;
 const router = t.router;

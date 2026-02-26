@@ -1,37 +1,20 @@
 import { useState } from 'react';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
-import { useOnboardService } from './services/OnboardService.js';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTRPC } from './trpc.js';
 import { SchoolList } from './components/SchoolList.js';
 import { SchoolForm } from './components/SchoolForm.js';
 import { StudentList } from './components/StudentList.js';
 import { StudentForm } from './components/StudentForm.js';
-import type {
-  School,
-  Student,
-  CreateSchoolInput,
-  CreateStudentInput,
-} from '@bawp/onboard-router';
+import type { School, Student } from '@bawp/onboard-router';
 
 import '@cb/apricot/CBGrid';
 
-const queryClient = new QueryClient();
-
 export function OnboardUi() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <OnboardPanel />
-    </QueryClientProvider>
-  );
+  return <OnboardPanel />;
 }
 
 function OnboardPanel() {
-  const service = useOnboardService();
+  const trpc = useTRPC();
   const qc = useQueryClient();
 
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
@@ -39,64 +22,61 @@ function OnboardPanel() {
   const [studentFormOpen, setStudentFormOpen] = useState(false);
 
   // ── Schools ──────────────────────────────────────────────
-  const schoolsQuery = useQuery({
-    queryKey: ['schools'],
-    queryFn: () => service.getSchools(),
-  });
+  const schoolsQuery = useQuery(trpc.schools.list.queryOptions());
 
-  const createSchool = useMutation({
-    mutationFn: (data: CreateSchoolInput) => service.createSchool(data),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['schools'] }),
-  });
+  const createSchool = useMutation(
+    trpc.schools.create.mutationOptions({
+      onSuccess: () =>
+        qc.invalidateQueries({ queryKey: trpc.schools.list.queryKey() }),
+    })
+  );
 
-  const deleteSchool = useMutation({
-    mutationFn: (id: string) => service.deleteSchool(id),
-    onSuccess: (_data, deletedId) => {
-      qc.invalidateQueries({ queryKey: ['schools'] });
-      if (selectedSchool?.id === deletedId) {
-        setSelectedSchool(null);
-      }
-    },
-  });
+  const deleteSchool = useMutation(
+    trpc.schools.delete.mutationOptions({
+      onSuccess: (_data, { id: deletedId }) => {
+        qc.invalidateQueries({ queryKey: trpc.schools.list.queryKey() });
+        if (selectedSchool?.id === deletedId) {
+          setSelectedSchool(null);
+        }
+      },
+    })
+  );
 
   // ── Students (only when a school is selected) ───────────
-  const studentsQuery = useQuery({
-    queryKey: ['students', selectedSchool?.id],
-    queryFn: () => {
-      if (!selectedSchool) throw new Error('No school selected');
-      return service.getStudents(selectedSchool.id);
-    },
-    enabled: !!selectedSchool,
-  });
+  const studentsQuery = useQuery(
+    trpc.students.list.queryOptions(
+      { schoolId: selectedSchool?.id ?? '' },
+      { enabled: !!selectedSchool }
+    )
+  );
 
-  const createStudent = useMutation({
-    mutationFn: (data: CreateStudentInput) => service.createStudent(data),
-    onSuccess: () =>
-      qc.invalidateQueries({ queryKey: ['students', selectedSchool?.id] }),
-  });
-
-  const deleteStudent = useMutation({
-    mutationFn: (id: string) => service.deleteStudent(id),
-    onSuccess: () =>
-      qc.invalidateQueries({ queryKey: ['students', selectedSchool?.id] }),
-  });
-
-  // ── Handlers ────────────────────────────────────────────
-  const handleCreateSchool = (data: CreateSchoolInput) => {
-    createSchool.mutate(data);
-  };
+  const createStudent = useMutation(
+    trpc.students.create.mutationOptions({
+      onSuccess: () =>
+        qc.invalidateQueries({ queryKey: trpc.students.list.queryKey() }),
+    })
+  );
+  const deleteStudent = useMutation(
+    trpc.students.delete.mutationOptions({
+      onSuccess: () =>
+        qc.invalidateQueries({ queryKey: trpc.students.list.queryKey() }),
+    })
+  );
 
   const handleDeleteSchool = (school: School) => {
-    deleteSchool.mutate(school.id);
+    deleteSchool.mutate({ id: school.id });
   };
 
-  const handleCreateStudent = (data: { firstName: string; lastName: string }) => {
+  const handleCreateStudent = (data: {
+    firstName: string;
+    lastName: string;
+  }) => {
     if (!selectedSchool) return;
     createStudent.mutate({ ...data, schoolId: selectedSchool.id });
   };
 
   const handleDeleteStudent = (student: Student) => {
-    deleteStudent.mutate(student.id);
+    deleteStudent.mutate({ id: student.id });
   };
 
   return (
@@ -125,7 +105,9 @@ function OnboardPanel() {
               onDelete={handleDeleteStudent}
             />
           ) : (
-            <div style={{ padding: '3rem', textAlign: 'center', color: '#666' }}>
+            <div
+              style={{ padding: '3rem', textAlign: 'center', color: '#666' }}
+            >
               <h2>Select a school</h2>
               <p>Choose a school from the list to manage its students.</p>
             </div>
@@ -137,7 +119,7 @@ function OnboardPanel() {
       <SchoolForm
         open={schoolFormOpen}
         onClose={() => setSchoolFormOpen(false)}
-        onSave={handleCreateSchool}
+        onSave={createSchool.mutate}
       />
       <StudentForm
         open={studentFormOpen}
