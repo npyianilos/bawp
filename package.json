@@ -38,9 +38,11 @@
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.0.0",
     "jiti": "2.4.2",
+    "jsdom": "~22.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "22.5.1",
     "prettier": "^2.6.2",
+    "sass": "^1.55.0",
     "storybook": "10.2.12",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
@@ -71,6 +73,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.71.2",
+    "react-router-dom": "6.30.3",
     "sass-embedded": "^1.97.3",
     "zod": "^4.3.6"
   }

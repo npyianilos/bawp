@@ -32,6 +32,9 @@
     },
     {
       "path": "./packages/events/events-saved"
+    },
+    {
+      "path": "./packages/host"
     }
   ]
 }

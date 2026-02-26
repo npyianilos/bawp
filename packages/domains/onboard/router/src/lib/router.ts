@@ -48,14 +48,14 @@ export const onboardRouter = router({
       .input(createStudentSchema)
       .mutation(async ({ ctx, input }) => {
         const student = await ctx.dataAccess.createStudent(input);
-        
+
         // Publish StudentEnrolledEvent to the event bus
         await ctx.eventPublisher?.publish<StudentEnrolledEvent.Payload>({
           source: StudentEnrolledEvent.source,
           detailType: StudentEnrolledEvent.detailType,
           detail: student,
         });
-        
+
         return student;
       }),
 

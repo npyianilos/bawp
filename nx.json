@@ -87,7 +87,18 @@
   "generators": {
     "@nx/react": {
       "library": {
+        "style": "scss",
+        "linter": "none",
         "unitTestRunner": "none"
+      },
+      "application": {
+        "babel": true,
+        "style": "scss",
+        "linter": "none",
+        "bundler": "vite"
+      },
+      "component": {
+        "style": "scss"
       }
     }
   }
