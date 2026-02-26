@@ -1,50 +1,26 @@
-// Uncomment this line to use CSS modules
 // import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { Header } from './header/header';
+import { OnboardUi } from '@bawp/onboard-ui';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@bawp/host" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
+      <Header />
       <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
       <Routes>
+        <Route path="/" element={<div>HOME</div>} />
         <Route
-          path="/"
+          path="/onboard"
           element={
             <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
+              <OnboardUi />
             </div>
           }
         />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
+        <Route path="/create" element={<div>Create</div>} />
       </Routes>
-      {/* END: routes */}
     </div>
   );
 }
