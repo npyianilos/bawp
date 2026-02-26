@@ -1,6 +1,12 @@
 import { initTRPC } from '@trpc/server';
 import type { GetReadyDataAccess } from './data-access.js';
-import { searchStudentsSchema } from './schemas.js';
+import {
+  searchStudentsSchema,
+  createSessionSchema,
+  listSessionsSchema,
+  addStudentToSessionSchema,
+  getSessionStudentsSchema,
+} from './schemas.js';
 
 export type Context = {
   dataAccess: GetReadyDataAccess;
@@ -17,6 +23,32 @@ export const getReadyRouter = router({
     .query(({ ctx, input }) => {
       return ctx.dataAccess.searchStudents(input);
     }),
+
+  sessions: router({
+    create: publicProcedure
+      .input(createSessionSchema)
+      .mutation(({ ctx, input }) => {
+        return ctx.dataAccess.createSession(input);
+      }),
+
+    list: publicProcedure
+      .input(listSessionsSchema)
+      .query(({ ctx, input }) => {
+        return ctx.dataAccess.listSessions(input);
+      }),
+
+    addStudent: publicProcedure
+      .input(addStudentToSessionSchema)
+      .mutation(({ ctx, input }) => {
+        return ctx.dataAccess.addStudentToSession(input);
+      }),
+
+    listStudents: publicProcedure
+      .input(getSessionStudentsSchema)
+      .query(({ ctx, input }) => {
+        return ctx.dataAccess.getSessionStudents(input);
+      }),
+  }),
 });
 
 export type GetReadyRouter = typeof getReadyRouter;
