@@ -38,6 +38,9 @@
     },
     {
       "path": "./packages/design-system/components"
+    },
+    {
+      "path": "./packages/domains/get-ready/router"
     }
   ]
 }

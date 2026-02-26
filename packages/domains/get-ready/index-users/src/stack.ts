@@ -3,7 +3,7 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as opensearch from 'aws-cdk-lib/aws-opensearchservice';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
-import { Stack, StackProps, RemovalPolicy } from 'aws-cdk-lib/core';
+import { Stack, StackProps, RemovalPolicy, CfnOutput } from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
 import { StudentEnrolledEvent } from '@bawp/events';
 
@@ -51,6 +51,11 @@ export class IndexUsersStack extends Stack {
         detailType: [StudentEnrolledEvent.detailType],
       },
       targets: [new targets.LambdaFunction(indexFn)],
+    });
+
+    new CfnOutput(this, 'OpenSearchEndpoint', {
+      value: searchDomain.domainEndpoint,
+      exportName: 'StudentSearchEndpoint',
     });
   }
 }

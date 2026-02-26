@@ -1,0 +1,13 @@
+{
+  "name": "@bawp/get-ready-lambda",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/credential-provider-node": "^3.972.12",
+    "@bawp/get-ready-router": "workspace:*",
+    "@opensearch-project/opensearch": "^3.5.1",
+    "@trpc/server": "^11.10.0",
+    "tslib": "^2.3.0"
+  }
+}
