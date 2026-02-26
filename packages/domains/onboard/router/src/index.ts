@@ -3,6 +3,7 @@ export {
   type OnboardRouter,
   type Context,
 } from './lib/router.js';
+export type { EventPublisher } from '@bawp/events';
 export type { OnboardDataAccess } from './lib/data-access.js';
 export { MockOnboardDataAccess } from './lib/mock-data-access.js';
 export type {

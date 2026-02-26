@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",
@@ -12,11 +12,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../router/tsconfig.lib.json"
-    },
-    {
-      "path": "../../../event-publisher/tsconfig.lib.json"
+      "path": "../events/tsconfig.lib.json"
     }
-  ],
-  "exclude": ["vitest.config.mts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+  ]
 }

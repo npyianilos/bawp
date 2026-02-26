@@ -7,9 +7,12 @@ import {
   createStudentSchema,
   deleteStudentSchema,
 } from './schemas.js';
+import { StudentEnrolledEvent } from '@bawp/events';
+import type { EventPublisher } from '@bawp/events';
 
 export type Context = {
   dataAccess: OnboardDataAccess;
+  eventPublisher?: EventPublisher;
 };
 
 const t = initTRPC.context<Context>().create({ allowOutsideOfServer: true });
@@ -43,8 +46,17 @@ export const onboardRouter = router({
 
     create: publicProcedure
       .input(createStudentSchema)
-      .mutation(({ ctx, input }) => {
-        return ctx.dataAccess.createStudent(input);
+      .mutation(async ({ ctx, input }) => {
+        const student = await ctx.dataAccess.createStudent(input);
+        
+        // Publish StudentEnrolledEvent to the event bus
+        await ctx.eventPublisher?.publish<StudentEnrolledEvent.Payload>({
+          source: StudentEnrolledEvent.source,
+          detailType: StudentEnrolledEvent.detailType,
+          detail: student,
+        });
+        
+        return student;
       }),
 
     delete: publicProcedure

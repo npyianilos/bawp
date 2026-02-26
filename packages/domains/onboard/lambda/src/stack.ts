@@ -1,10 +1,13 @@
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import { Stack, StackProps, RemovalPolicy, CfnOutput } from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
 
 const TABLE_NAME = 'OnboardTable';
+const EVENT_BUS_NAME = 'bawp-event-bus';
 
 export class LambdaStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -36,10 +39,26 @@ export class LambdaStack extends Stack {
       entry: 'src/lambda.ts',
       environment: {
         TABLE_NAME: table.tableName,
+        EVENT_BUS_NAME,
       },
     });
 
     table.grantReadWriteData(fn);
+
+    // Look up the shared event bus
+    const bus = events.EventBus.fromEventBusName(
+      this,
+      'SharedBus',
+      EVENT_BUS_NAME
+    );
+
+    // Grant permission to publish events to the bus
+    fn.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['events:PutEvents'],
+        resources: [bus.eventBusArn],
+      })
+    );
 
     // Function URL for HTTP access
     const fnUrl = fn.addFunctionUrl({
