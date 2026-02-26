@@ -12,7 +12,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../../events/tsconfig.lib.json"
+      "path": "../../../events/events-saved/tsconfig.lib.json"
     }
   ],
   "exclude": [

@@ -1,6 +1,7 @@
 packages:
   - 'packages/*'
   - 'packages/utils/*'
+  - 'packages/events/*'
   - 'packages/domains/*/*'
   - 'tools/*'
   - 'packages/design-system/*'

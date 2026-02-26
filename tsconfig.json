@@ -16,12 +16,6 @@
       "path": "./packages/domains/get-ready/index-users"
     },
     {
-      "path": "./packages/events"
-    },
-    {
-      "path": "./packages/event-bus"
-    },
-    {
       "path": "./packages/domains/onboard/ui"
     },
     {
@@ -31,7 +25,13 @@
       "path": "./packages/domains/onboard/lambda"
     },
     {
-      "path": "./packages/event-publisher"
+      "path": "./packages/events/event-bus"
+    },
+    {
+      "path": "./packages/events/event-publisher"
+    },
+    {
+      "path": "./packages/events/events-saved"
     }
   ]
 }

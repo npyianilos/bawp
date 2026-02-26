@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/packages/cdkdemo',
+  cacheDir: '../../../node_modules/.vite/packages/cdkdemo',
   test: {
     name: '@org/cdkdemo',
     watch: false,

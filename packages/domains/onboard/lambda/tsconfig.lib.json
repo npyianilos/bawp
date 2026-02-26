@@ -15,7 +15,7 @@
       "path": "../router/tsconfig.lib.json"
     },
     {
-      "path": "../../../event-publisher/tsconfig.lib.json"
+      "path": "../../../events/event-publisher/tsconfig.lib.json"
     }
   ],
   "exclude": ["vitest.config.mts", "src/**/*.test.ts", "src/**/*.spec.ts"]
