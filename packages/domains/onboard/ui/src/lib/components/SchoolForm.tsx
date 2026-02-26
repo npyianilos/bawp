@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { Modal, PrimaryButton, NakedButton } from '@cb/apricot-react';
 import { Input } from '@bawp/form-controls';
 import type { CreateSchoolInput } from '@bawp/onboard-router';
+import { ActionModal } from '@bawp/components';
 
 type SchoolFormProps = {
   open: boolean;
@@ -22,25 +22,19 @@ export function SchoolForm({ open, onClose, onSave }: SchoolFormProps) {
   });
 
   return (
-    <Modal
+    <ActionModal
+      title="Add School"
       open={open}
+      actionLabel="Save"
+      onAction={onSubmit}
       onClose={() => {
         reset();
         onClose();
       }}
-      title="Add School"
-      footer={
-        <>
-          <NakedButton data-cb-modal-close>Cancel</NakedButton>
-          <PrimaryButton onClick={onSubmit}>Save</PrimaryButton>
-        </>
-      }
     >
       <FormProvider {...methods}>
-        <form onSubmit={onSubmit}>
           <Input name="name" label="School Name" required />
-        </form>
       </FormProvider>
-    </Modal>
+    </ActionModal>
   );
 }

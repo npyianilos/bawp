@@ -35,6 +35,9 @@
     },
     {
       "path": "./packages/host"
+    },
+    {
+      "path": "./packages/design-system/components"
     }
   ]
 }

@@ -214,6 +214,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.18(@types/node@20.19.9)(@vitest/ui@4.0.18)(jiti@2.4.2)(jsdom@22.1.0)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
 
+  packages/design-system/components: {}
+
   packages/design-system/form-controls: {}
 
   packages/domains/get-ready/index-users:
@@ -266,6 +268,9 @@ importers:
 
   packages/domains/onboard/ui:
     dependencies:
+      '@bawp/components':
+        specifier: workspace:*
+        version: link:../../../design-system/components
       '@bawp/form-controls':
         specifier: workspace:*
         version: link:../../../design-system/form-controls
