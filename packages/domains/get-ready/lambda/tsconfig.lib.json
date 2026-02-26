@@ -10,6 +10,10 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "references": [],
+  "references": [
+    {
+      "path": "../router/tsconfig.lib.json"
+    }
+  ],
   "exclude": ["vitest.config.mts", "src/**/*.test.ts", "src/**/*.spec.ts"]
 }
