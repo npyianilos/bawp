@@ -15,7 +15,7 @@ export function App() {
           path="/onboard"
           element={
             <div>
-              <OnboardWithTrpc apiUrl="https://a7hvippzbwtzpigl7ippdv4yim0frjee.lambda-url.us-east-1.on.aws" />
+              <OnboardWithTrpc apiUrl="https://cfpqdc7w5acfqsz432uouka4xy0joyyq.lambda-url.us-east-1.on.aws" />
             </div>
           }
         />

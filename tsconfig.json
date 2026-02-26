@@ -47,6 +47,9 @@
     },
     {
       "path": "./packages/domains/onboard/public"
+    },
+    {
+      "path": "./packages/domains/get-ready/ui"
     }
   ]
 }

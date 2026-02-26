@@ -4,6 +4,7 @@ import * as opensearch from 'aws-cdk-lib/aws-opensearchservice';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import { Stack, StackProps, RemovalPolicy, CfnOutput } from 'aws-cdk-lib/core';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { StudentEnrolledEvent } from '@bawp/events';
 
@@ -22,6 +23,14 @@ export class IndexUsersStack extends Stack {
         volumeSize: 10, // GB
       },
       removalPolicy: RemovalPolicy.DESTROY,
+      accessPolicies: [
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          principals: [new iam.AccountRootPrincipal()],
+          actions: ['es:*'],
+          resources: ['*'], // scoped to this domain by CDK automatically
+        }),
+      ],
     });
 
     // Lambda that indexes students into OpenSearch
@@ -56,6 +65,11 @@ export class IndexUsersStack extends Stack {
     new CfnOutput(this, 'OpenSearchEndpoint', {
       value: searchDomain.domainEndpoint,
       exportName: 'StudentSearchEndpoint',
+    });
+
+    new CfnOutput(this, 'OpenSearchDomainArn', {
+      value: searchDomain.domainArn,
+      exportName: 'StudentSearchDomainArn',
     });
   }
 }

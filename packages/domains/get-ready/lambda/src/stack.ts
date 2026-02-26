@@ -8,14 +8,18 @@ export class LambdaStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // Import the OpenSearch endpoint exported by the index-users stack
+    // Import values exported by the index-users stack
     const endpoint = Fn.importValue('StudentSearchEndpoint');
+    const domainArn = Fn.importValue('StudentSearchDomainArn');
 
-    // Look up the OpenSearch domain by its endpoint
-    const searchDomain = opensearch.Domain.fromDomainEndpoint(
+    // Look up the OpenSearch domain by attributes (fromDomainEndpoint fails with Tokens)
+    const searchDomain = opensearch.Domain.fromDomainAttributes(
       this,
       'StudentSearchDomain',
-      `https://${endpoint}`
+      {
+        domainArn,
+        domainEndpoint: endpoint,
+      }
     );
 
     const fn = new NodejsFunction(this, 'Fn', {
