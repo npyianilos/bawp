@@ -278,6 +278,15 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
 
+  packages/domains/onboard/public:
+    dependencies:
+      '@bawp/onboard-router':
+        specifier: workspace:*
+        version: link:../router
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/domains/onboard/router:
     dependencies:
       '@bawp/events':

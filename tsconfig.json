@@ -44,6 +44,9 @@
     },
     {
       "path": "./packages/domains/get-ready/lambda"
+    },
+    {
+      "path": "./packages/domains/onboard/public"
     }
   ]
 }
