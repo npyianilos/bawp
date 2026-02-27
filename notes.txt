@@ -1,0 +1,39 @@
+domains
+  A
+    router
+      defines interface dataAccessA
+      schools.list
+        dataAccessA.listSchools()
+      RouterAShape
+    lambda
+      stack
+        implements dataAccessA
+          listSchools -> dynamoDB probably
+        lambda deployed to endpointA
+    ui
+      trpcClientA (endpointA)
+    public
+      trpcClientA = createVanillaTrpcClient<RouterAShape>({url: endpointA})
+      dataAccessA (internally, uses trpcClientA)
+        listSchools()
+  B
+    router
+      zod schemas -> types
+        ModuleBSchool type
+      defines dataAccessB
+        createSomeDataBObject()....
+        getAllSchools(): ModuleBSchoolB
+    lambda
+      dataAccessB implementation
+        import {listSchoolsA} from "@bawp/A-public"
+        getAllSchools()
+          return listSchoolsA().then(schoolA => ({name: schoolA.schoolName, ...}))
+host
+  import {listSchoolsA} from "@bawp/A-public"
+
+
+
+get-ready
+  lambda
+    import {listSchools} from "@onboard/public"
+    const schols = await listSchools()

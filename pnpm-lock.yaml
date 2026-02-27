@@ -409,6 +409,9 @@ importers:
       '@bawp/get-ready-ui':
         specifier: workspace:*
         version: link:../domains/get-ready/ui
+      '@bawp/onboard-public':
+        specifier: workspace:*
+        version: link:../domains/onboard/public
       '@bawp/onboard-ui':
         specifier: workspace:*
         version: link:../domains/onboard/ui

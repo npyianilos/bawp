@@ -31,11 +31,9 @@ export const getReadyRouter = router({
         return ctx.dataAccess.createSession(input);
       }),
 
-    list: publicProcedure
-      .input(listSessionsSchema)
-      .query(({ ctx, input }) => {
-        return ctx.dataAccess.listSessions(input);
-      }),
+    list: publicProcedure.input(listSessionsSchema).query(({ ctx, input }) => {
+      return ctx.dataAccess.listSessions(input);
+    }),
 
     addStudent: publicProcedure
       .input(addStudentToSessionSchema)

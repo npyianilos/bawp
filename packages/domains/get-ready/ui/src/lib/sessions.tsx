@@ -28,9 +28,7 @@ export const Sessions = () => {
     listSchools().then(setSchools);
   }, [listSchools]);
 
-  const { data: sessions = [] } = useQuery(
-    trpc.sessions.list.queryOptions({})
-  );
+  const { data: sessions = [] } = useQuery(trpc.sessions.list.queryOptions({}));
 
   const createSession = useMutation(
     trpc.sessions.create.mutationOptions({

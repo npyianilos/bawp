@@ -122,7 +122,9 @@ export class GetReadyDataAccessImpl implements GetReadyDataAccess {
   // --- DynamoDB: sessions ---
 
   async createSession(input: CreateSessionInput): Promise<Session> {
-    const id = `session-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+    const id = `session-${Date.now()}-${Math.random()
+      .toString(36)
+      .slice(2, 9)}`;
     const session: Session = { id, ...input };
 
     await this.docClient.send(

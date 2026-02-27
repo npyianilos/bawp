@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@bawp/get-ready-ui": "workspace:*",
-    "@bawp/onboard-ui": "workspace:*"
+    "@bawp/onboard-ui": "workspace:*",
+    "@bawp/onboard-public": "workspace:*"
   }
 }

@@ -60,5 +60,7 @@ export type Session = z.infer<typeof sessionSchema>;
 export type CreateSessionInput = z.infer<typeof createSessionSchema>;
 export type ListSessionsInput = z.infer<typeof listSessionsSchema>;
 export type SessionStudent = z.infer<typeof sessionStudentSchema>;
-export type AddStudentToSessionInput = z.infer<typeof addStudentToSessionSchema>;
+export type AddStudentToSessionInput = z.infer<
+  typeof addStudentToSessionSchema
+>;
 export type GetSessionStudentsInput = z.infer<typeof getSessionStudentsSchema>;

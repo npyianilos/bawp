@@ -5,19 +5,31 @@ import { Header } from './header/header';
 import { OnboardWithTrpc } from '@bawp/onboard-ui';
 import { GetReady } from '@bawp/get-ready-ui';
 import type { GetReadyContract } from '@bawp/get-ready-ui';
+import { listSchools } from '@bawp/onboard-public';
 
 const ONBOARD_API_URL =
   'https://cfpqdc7w5acfqsz432uouka4xy0joyyq.lambda-url.us-east-1.on.aws';
 
 const getReadyContract: GetReadyContract = {
   async listSchools() {
-    const res = await fetch(
-      `${ONBOARD_API_URL}/schools.list?batch=1&input=${encodeURIComponent(JSON.stringify({ '0': {} }))}`
-    );
-    const json = await res.json();
-    return json[0].result.data;
+    const onboardSchools = await listSchools();
+    return onboardSchools.map((os) => ({
+      id: os.id,
+      name: os.name,
+    }));
   },
 };
+//const getReadyContract: GetReadyContract = {
+//async listSchools() {
+//const res = await fetch(
+//`${ONBOARD_API_URL}/schools.list?batch=1&input=${encodeURIComponent(
+//JSON.stringify({ '0': {} })
+//)}`
+//);
+//const json = await res.json();
+//return json[0].result.data;
+//},
+//};
 
 export function App() {
   return (
