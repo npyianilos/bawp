@@ -50,6 +50,9 @@
     },
     {
       "path": "./packages/domains/get-ready/ui"
+    },
+    {
+      "path": "./packages/domains/deliver/registration"
     }
   ]
 }

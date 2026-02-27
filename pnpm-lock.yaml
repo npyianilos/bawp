@@ -218,6 +218,12 @@ importers:
 
   packages/design-system/form-controls: {}
 
+  packages/domains/deliver/registration:
+    dependencies:
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/domains/get-ready/index-users:
     dependencies:
       '@bawp/events':
