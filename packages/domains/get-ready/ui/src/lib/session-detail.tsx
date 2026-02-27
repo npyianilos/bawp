@@ -81,9 +81,7 @@ export const SessionDetail = ({
       </div>
 
       <div>
-        <h3 style={{ marginBottom: '0.5rem' }}>
-          Students ({students.length})
-        </h3>
+        <h3 style={{ marginBottom: '0.5rem' }}>Students ({students.length})</h3>
         {students.length === 0 ? (
           <p style={{ color: '#888' }}>
             No students added yet. Search above to add students.

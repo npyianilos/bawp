@@ -5,9 +5,9 @@ import { SimpleCard, PrimaryButton } from '@cb/apricot-react';
 import { Input, SelectDropdown, DatePicker } from '@bawp/form-controls';
 import { ActionModal } from '@bawp/components';
 import { useTRPC } from './trpc.js';
-import { useGetReadyContract } from '../contract-context';
+import { useGetReadyAdapter } from '../contract-context';
 import { SessionDetail } from './session-detail.js';
-import type { School } from '../contract';
+import type { School } from '../port';
 import type { Session } from '@bawp/get-ready-router';
 
 type CreateSessionFormData = {
@@ -19,7 +19,7 @@ type CreateSessionFormData = {
 export const Sessions = () => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const { listSchools } = useGetReadyContract();
+  const { listSchools } = useGetReadyAdapter();
   const [schools, setSchools] = useState<School[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);

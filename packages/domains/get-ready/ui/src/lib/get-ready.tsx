@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { GetReadyContract } from '../contract';
+import { GetReadyPort } from '../port';
 import { ContractContext } from '../contract-context';
 import { createTRPCClient, httpBatchLink } from '@trpc/client';
 import { GetReadyRouter } from '@bawp/get-ready-router';
@@ -11,10 +11,10 @@ const FUNCTION_URL =
   'https://q2pkc6hqqbhpxlheplrioj7kda0wfhie.lambda-url.us-east-1.on.aws';
 
 type Props = {
-  contract: GetReadyContract;
+  adapter: GetReadyPort;
 };
 
-export const GetReady: FC<Props> = ({ contract }) => {
+export const GetReady: FC<Props> = ({ adapter }) => {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     createTRPCClient<GetReadyRouter>({
@@ -22,7 +22,7 @@ export const GetReady: FC<Props> = ({ contract }) => {
     })
   );
   return (
-    <ContractContext.Provider value={contract}>
+    <ContractContext.Provider value={adapter}>
       <QueryClientProvider client={queryClient}>
         <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
           <Sessions />

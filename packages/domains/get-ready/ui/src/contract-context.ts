@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
-import type { GetReadyContract } from './contract';
+import type { GetReadyPort } from './port';
 
-export const ContractContext = createContext<GetReadyContract | null>(null);
+export const ContractContext = createContext<GetReadyPort | null>(null);
 
-export function useGetReadyContract() {
+export function useGetReadyAdapter() {
   const value = useContext(ContractContext);
   if (!value)
     throw new Error(

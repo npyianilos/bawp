@@ -3,6 +3,6 @@ export type School = {
   name: string;
 };
 
-export interface GetReadyContract {
+export interface GetReadyPort {
   listSchools(): Promise<School[]>;
 }

@@ -1,6 +1,6 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { Modal, PrimaryButton, NakedButton } from '@cb/apricot-react';
 import { Input } from '@bawp/form-controls';
+import { ActionModal } from '@bawp/components';
 
 type StudentFormData = {
   firstName: string;
@@ -30,16 +30,12 @@ export function StudentForm({ open, onClose, onSave }: StudentFormProps) {
   };
 
   return (
-    <Modal
+    <ActionModal
       open={open}
       onClose={handleClose}
       title="Add Student"
-      footer={
-        <>
-          <NakedButton onClick={handleClose}>Cancel</NakedButton>
-          <PrimaryButton onClick={handleSubmit}>Save</PrimaryButton>
-        </>
-      }
+      onAction={handleSubmit}
+      actionLabel="Save"
     >
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit}>
@@ -47,6 +43,6 @@ export function StudentForm({ open, onClose, onSave }: StudentFormProps) {
           <Input name="lastName" label="Last Name" required />
         </form>
       </FormProvider>
-    </Modal>
+    </ActionModal>
   );
 }

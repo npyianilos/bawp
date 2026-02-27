@@ -10,7 +10,11 @@ export type UserSearchProps = {
   excludeIds?: Set<string>;
 };
 
-export const UserSearch = ({ schoolId, onSelect, excludeIds }: UserSearchProps) => {
+export const UserSearch = ({
+  schoolId,
+  onSelect,
+  excludeIds,
+}: UserSearchProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const trpc = useTRPC();
 
