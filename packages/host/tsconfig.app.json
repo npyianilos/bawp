@@ -31,6 +31,9 @@
   "references": [
     {
       "path": "../domains/onboard/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "../domains/get-ready/ui/tsconfig.lib.json"
     }
   ]
 }

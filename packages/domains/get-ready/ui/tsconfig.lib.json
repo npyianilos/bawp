@@ -38,6 +38,9 @@
     },
     {
       "path": "../../../design-system/form-controls/tsconfig.lib.json"
+    },
+    {
+      "path": "../../../design-system/components/tsconfig.lib.json"
     }
   ]
 }

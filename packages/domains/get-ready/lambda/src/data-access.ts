@@ -39,25 +39,51 @@ export class GetReadyDataAccessImpl implements GetReadyDataAccess {
   // --- OpenSearch: student search ---
 
   async searchStudents(input: SearchStudentsInput): Promise<SearchStudent[]> {
+    const queryLower = input.query.toLowerCase();
+    const filter: Record<string, unknown>[] = [];
+
+    if (input.schoolId) {
+      filter.push({ term: { 'schoolId.keyword': input.schoolId } });
+    }
+
     const must: Record<string, unknown>[] = [
       {
-        multi_match: {
-          query: input.query,
-          fields: ['firstName', 'lastName'],
-          type: 'phrase_prefix',
+        bool: {
+          should: [
+            {
+              multi_match: {
+                query: input.query,
+                fields: ['firstName', 'lastName'],
+                type: 'phrase_prefix',
+              },
+            },
+            {
+              wildcard: {
+                'firstName.keyword': {
+                  value: `*${queryLower}*`,
+                  case_insensitive: true,
+                },
+              },
+            },
+            {
+              wildcard: {
+                'lastName.keyword': {
+                  value: `*${queryLower}*`,
+                  case_insensitive: true,
+                },
+              },
+            },
+          ],
+          minimum_should_match: 1,
         },
       },
     ];
-
-    if (input.schoolId) {
-      must.push({ term: { 'schoolId.keyword': input.schoolId } });
-    }
 
     try {
       const result = await this.osClient.search({
         index: 'students',
         body: {
-          query: { bool: { must } },
+          query: { bool: { must, filter } },
         },
       });
 

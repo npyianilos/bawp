@@ -265,6 +265,9 @@ importers:
 
   packages/domains/get-ready/ui:
     dependencies:
+      '@bawp/components':
+        specifier: workspace:*
+        version: link:../../../design-system/components
       '@bawp/form-controls':
         specifier: workspace:*
         version: link:../../../design-system/form-controls
@@ -289,6 +292,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
+      react-hook-form:
+        specifier: ^7.51.2
+        version: 7.71.2(react@19.2.4)
 
   packages/domains/onboard/lambda:
     dependencies:
@@ -400,6 +406,9 @@ importers:
 
   packages/host:
     dependencies:
+      '@bawp/get-ready-ui':
+        specifier: workspace:*
+        version: link:../domains/get-ready/ui
       '@bawp/onboard-ui':
         specifier: workspace:*
         version: link:../domains/onboard/ui
